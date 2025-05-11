@@ -112,3 +112,31 @@ dotNavs.addEventListener("click", (e) => {
   updateDots(currentDot, targetDot);
   hideShowArrows(dotTargetIndex);
 });
+
+//auto move to next slide
+const goToNextSlide = () => {
+  const currentSlide = track.querySelector(".current-slide");
+  const nextSlide = currentSlide.nextElementSibling || slides[0];
+
+  const currentDot = dotNavs.querySelector(".current-slide");
+  const nextDot = currentDot.nextElementSibling || dots[0];
+
+  moveToSlide(track, currentSlide, nextSlide);
+  updateDots(currentDot, nextDot);
+
+  const nextSlideIndex = slides.findIndex((slide) => slide === nextSlide);
+  hideShowArrows(nextSlideIndex);
+};
+
+let autoSlide = setInterval(goToNextSlide, 2000);
+
+const pauseAutoSlide = () => clearInterval(autoSlide);
+const resumeAutoSlide = () => {
+  autoSlide = setInterval(goToNextSlide, 2000);
+};
+
+// Pause when user hovers over the carousel track, arrows, or dots
+[track, prevBtn, nextBtn, dotNavs].forEach((el) => {
+  el.addEventListener("mouseenter", pauseAutoSlide);
+  el.addEventListener("mouseleave", resumeAutoSlide);
+});
