@@ -58,7 +58,7 @@
 .carousel-nav {
   display: flex;
   justify-content: center;
-  gap: 10px;
+  gap: 20px;
   padding: 10px 0;
 }
 
@@ -73,4 +73,8 @@
 
 .carousel-indicator.current-slide {
   background: rgba(0, 0, 0, 0.65);
+}
+
+.is-hidden {
+  display: none;
 }
